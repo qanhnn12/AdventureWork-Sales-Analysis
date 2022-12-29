@@ -211,7 +211,7 @@ UPDATE FactSurveyResponse SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(yea
 -- DateKey (data type: int) 
 
 UPDATE FactCallCenter SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
-UPDATE FactCurrencyRate SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, 112) AS int) END 
+UPDATE FactCurrencyRate SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
 UPDATE FactFinance SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
 UPDATE FactInternetSales SET DueDateKey = CASE WHEN DueDateKey IS NOT NULL THEN CAST(CONVERT(varchar,[DueDate], 112) AS int) END 
 UPDATE FactInternetSales SET OrderDateKey = CASE WHEN OrderDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [OrderDate], 112) AS int) END 
