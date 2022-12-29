@@ -239,17 +239,17 @@ REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactCurrencyRate] CHECK CONSTRAINT [FK_FactCurrencyRate_DimDate]
 
-ALTER TABLE [dbo].[FactFinance] WITH CHECK ADD  CONSTRAINT [FK_FactFinance_DimDate] FOREIGN KEY([DateKey])
+ALTER TABLE [dbo].[FactFinance] WITH CHECK ADD CONSTRAINT [FK_FactFinance_DimDate] FOREIGN KEY([DateKey])
 REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactFinance] CHECK CONSTRAINT [FK_FactFinance_DimDate]
 
-ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD  CONSTRAINT [FK_FactInternetSales_DimDate] FOREIGN KEY([OrderDateKey])
+ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD CONSTRAINT [FK_FactInternetSales_DimDate] FOREIGN KEY([OrderDateKey])
 REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactInternetSales] CHECK CONSTRAINT [FK_FactInternetSales_DimDate]
 
-ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD  CONSTRAINT [FK_FactInternetSales_DimDate1] FOREIGN KEY([DueDateKey])
+ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD CONSTRAINT [FK_FactInternetSales_DimDate1] FOREIGN KEY([DueDateKey])
 REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactInternetSales] CHECK CONSTRAINT [FK_FactInternetSales_DimDate1]
@@ -264,7 +264,7 @@ REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactProductInventory] CHECK CONSTRAINT [FK_FactProductInventory_DimDate]
 
-ALTER TABLE [dbo].[FactResellerSales]  WITH CHECK ADD CONSTRAINT [FK_FactResellerSales_DimDate] FOREIGN KEY([OrderDateKey])
+ALTER TABLE [dbo].[FactResellerSales] WITH CHECK ADD CONSTRAINT [FK_FactResellerSales_DimDate] FOREIGN KEY([OrderDateKey])
 REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactResellerSales] CHECK CONSTRAINT [FK_FactResellerSales_DimDate]
