@@ -19,12 +19,13 @@ DECLARE @CurrentYear INT
 SET @CurrentYear = YEAR(GETDATE())
 
 DECLARE @LastDayCurrentYear DATE
-SET @LastDayCurrentYear = GETDATE() - DATEPART(DY, GETDATE())
+SET @LastDayCurrentYear = DATEADD(dd, -1, DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) +1, 0)) 
 
 DECLARE @MaxDateInDW INT
 SELECT @MaxDateInDW = MAX(YEAR(orderdate)) FROM [dbo].[FactInternetSales] 
 
-DECLARE @YearsToAdd INT = @CurrentYear - @MaxDateInDW 
+DECLARE @YearsToAdd INT 
+SET @YearsToAdd = @CurrentYear - @MaxDateInDW 
 
 
 
