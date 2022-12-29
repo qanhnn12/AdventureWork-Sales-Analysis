@@ -187,68 +187,39 @@ ORDER BY DateKey DESC
 -- Birth Date and Hire Date are not being updated 
 
 UPDATE DimCustomer SET DateFirstPurchase = CASE WHEN DateFirstPurchase IS NOT NULL THEN DATEADD(year, @YearsToAdd, DateFirstPurchase) END 
-
 UPDATE DimEmployee SET StartDate = CASE WHEN StartDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, StartDate) END 
-
 UPDATE DimEmployee SET EndDate = CASE WHEN EndDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, EndDate) END 
-
 UPDATE DimProduct SET StartDate = CASE WHEN StartDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, StartDate) END 
-
 UPDATE DimProduct SET EndDate = CASE WHEN EndDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, EndDate) END 
-
 UPDATE DimPromotion SET StartDate = CASE WHEN StartDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, StartDate) END 
-
 UPDATE DimPromotion SET EndDate = CASE WHEN EndDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, EndDate) END 
-
 UPDATE FactCallCenter SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(year, @YearsToAdd, Date) END 
-
 UPDATE FactCurrencyRate SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(year, @YearsToAdd, Date) END 
-
 UPDATE FactFinance SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(year, @YearsToAdd, Date) END 
-
 UPDATE FactInternetSales SET OrderDate = CASE WHEN OrderDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, OrderDate) END 
-
 UPDATE FactInternetSales SET DueDate = CASE WHEN DueDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, DueDate) END 
-
 UPDATE FactInternetSales SET ShipDate = CASE WHEN ShipDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, ShipDate) END 
-
 UPDATE FactProductInventory SET MovementDate = CASE WHEN MovementDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, MovementDate) END 
-
 UPDATE FactResellerSales SET OrderDate = CASE WHEN OrderDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, OrderDate) END 
-
 UPDATE FactResellerSales SET DueDate = CASE WHEN DueDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, DueDate) END 
-
 UPDATE FactResellerSales SET ShipDate = CASE WHEN ShipDate IS NOT NULL THEN DATEADD(year, @YearsToAdd, ShipDate) END 
-
 UPDATE FactSalesQuota SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(year, @YearsToAdd, Date) END 
-
 UPDATE FactSurveyResponse SET Date = CASE WHEN Date IS NOT NULL THEN DATEADD(year, @YearsToAdd, Date) END 
 
 
 -- DateKey (data type: int) 
 
 UPDATE FactCallCenter SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
-
 UPDATE FactCurrencyRate SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, 112) AS int) END 
-
 UPDATE FactFinance SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
-
 UPDATE FactInternetSales SET DueDateKey = CASE WHEN DueDateKey IS NOT NULL THEN CAST(CONVERT(varchar,[DueDate], 112) AS int) END 
-
 UPDATE FactInternetSales SET OrderDateKey = CASE WHEN OrderDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [OrderDate], 112) AS int) END 
-
 UPDATE FactInternetSales SET ShipDateKey = CASE WHEN ShipDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [ShipDate], 112) AS int) END 
-
 UPDATE FactProductInventory SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [MovementDate], 112) AS int) END 
-
 UPDATE FactResellerSales SET DueDateKey = CASE WHEN DueDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [ShipDate], 112) AS int) END 
-
 UPDATE FactResellerSales SET OrderDateKey = CASE WHEN OrderDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [ShipDate], 112) AS int) END 
-
 UPDATE FactResellerSales SET ShipDateKey = CASE WHEN ShipDateKey IS NOT NULL THEN CAST(CONVERT(varchar, [ShipDate], 112) AS int) END 
-
 UPDATE FactSalesQuota SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
-
 UPDATE FactSurveyResponse SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
 
  
@@ -256,11 +227,8 @@ UPDATE FactSurveyResponse SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(
 -- Update tables where year is a number in the format YYYY 
 
 UPDATE FactSalesQuota SET CalendarYear = CASE WHEN CalendarYear IS NOT NULL THEN @YearsToAdd + CalendarYear END 
-
 UPDATE DimReseller SET FirstOrderYear = CASE WHEN FirstOrderYear IS NOT NULL THEN @YearsToAdd + FirstOrderYear END 
-
 UPDATE DimReseller SET LastOrderYear = CASE WHEN LastOrderYear IS NOT NULL THEN @YearsToAdd + LastOrderYear END 
-
 UPDATE DimReseller SET YearOpened = CASE WHEN YearOpened IS NOT NULL THEN @YearsToAdd + YearOpened END 
 
  
