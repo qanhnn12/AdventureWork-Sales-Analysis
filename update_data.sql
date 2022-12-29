@@ -177,7 +177,7 @@ SELECT
 		WHEN 4 THEN 1 
 	END AS FiscalSemester 
 FROM @datelist dl  
-LEFT JOIN [dbo].[dimdate] dt  
+LEFT JOIN [dbo].[DimDate] dt  
 	ON dt.FullDateAlternateKey = dl.FullDate 
 WHERE  dt.DateKey IS NULL 
 ORDER BY DateKey DESC
