@@ -121,7 +121,7 @@ SELECT
 	, DATEPART(dy, dl.FullDate) AS DayNumberOfYear 
 	, DATEPART(wk, dl.FullDate) AS WeekNumberOfYear
 	, DATENAME(MONTH, dl.FullDate) AS EnglishMonthName
-	, CASE DATENAME(weekday, dl.FullDate) 
+	, CASE DATENAME(MONTH, dl.FullDate) 
 		WHEN 'January' THEN 'Enero'  
 		WHEN 'February' THEN 'Febrero' 
 		WHEN 'March' THEN 'Marzo'  
@@ -135,7 +135,7 @@ SELECT
 		WHEN 'November' THEN 'Noviembre'  
 		WHEN 'December' THEN 'Diciembre' 
 	END AS SpanishMonthName
-	, CASE DATENAME(weekday, dl.FullDate) 
+	, CASE DATENAME(MONTH, dl.FullDate) 
 		WHEN 'January' THEN 'Janvier'  
 		WHEN 'February' THEN 'Février'  
 		WHEN 'March' THEN 'Mars'  
