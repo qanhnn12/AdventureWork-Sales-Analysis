@@ -31,9 +31,9 @@ From the AdventureWork database, we use SQL to generate these tables below:
 * DIM_Calendar
 * FACT_InternetSales
 
-Save those table as CSV files to import to Power BI later.
+Then, save them as CSV files to import to Power BI later.
 
-Note: FACT_Budget is generated from a seperated Excel file [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/blob/main/Data%20Cleaning/SalesBudget.xlsx).
+*Note: FACT_Budget is generated from a seperated Excel file [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/blob/main/Data%20Cleaning/SalesBudget.xlsx).*
 
 ### > Table `DIM_Customers`
 ```TSQL
@@ -53,14 +53,73 @@ ORDER BY c.CustomerKey
 ### > Table `DIM_Products`
 ```TSQL
 SELECT 
-  c.[CustomerKey]
-  ,c.[FirstName] + ' ' + c.[LastName] AS FullName
-  ,CASE c.[Gender] WHEN 'M' THEN 'Male' ELSE 'Female' END AS Gender
-  ,c.[DateFirstPurchase]
-	,g.City AS [Customer City]
-FROM [AdventureWorksDW2019].[dbo].[DimCustomer] c
-LEFT JOIN [dbo].[DimGeography] g
-  ON c.GeographyKey = g.GeographyKey
-ORDER BY c.CustomerKey
+  p.[ProductKey]
+  ,p.[ProductAlternateKey] AS ProductItemCode
+  ,p.[EnglishProductName] AS [Product Name]
+  ,ps.[EnglishProductSubcategoryName] AS [Sub Category] --joined with Sub Category Table
+  ,pc.[EnglishProductCategoryName] AS [Product Category] --joined with Category Table
+  ,p.[Color] AS [Product Color]
+  ,p.[Size] AS [Product Size]
+  ,p.[ProductLine] AS [Product Line]
+  ,p.[ModelName] AS [Product Model Name]
+  ,p.[EnglishDescription] AS [Product Description]
+  ,ISNULL(p.[Status], 'Outdated') AS [Product Status]
+FROM [AdventureWorksDW2019].[dbo].[DimProduct] p
+LEFT JOIN [dbo].[DimProductSubcategory] ps ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+LEFT JOIN [dbo].[DimProductCategory] pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+ORDER BY p.[ProductKey]
 ```
+![image](https://user-images.githubusercontent.com/84619797/210082021-902047a1-4a4c-4655-817a-fc75947606c5.png)
+
+### > Table `DIM_Calendar`
+```TSQL
+SELECT 
+  [DateKey] 
+  ,[FullDateAlternateKey] AS Date
+  ,[EnglishDayNameOfWeek] AS Day
+  ,[WeekNumberOfYear] AS WeekNo
+  ,LEFT([EnglishMonthName], 3) AS MonthShort
+  ,[MonthNumberOfYear] AS MonthNo
+  ,[CalendarQuarter] AS Quarter 
+  ,[CalendarYear] AS Year
+FROM [AdventureWorksDW2019].[dbo].[DimDate]
+WHERE [CalendarYear] >= 2020	--2 years back in time
+```
+![image](https://user-images.githubusercontent.com/84619797/210082248-3880cb1f-18d0-4010-950b-f46906f8a37b.png)
+
+### > Table `FACT_InternetSales`
+```TSQL
+SELECT [ProductKey]
+      ,[OrderDateKey]
+      ,[DueDateKey]
+      ,[ShipDateKey]
+      ,[CustomerKey]
+      ,[SalesOrderNumber]
+      ,[SalesAmount]
+FROM [AdventureWorksDW2019].[dbo].[FactInternetSales]
+WHERE LEFT(OrderDateKey, 4) >= YEAR(GETDATE()) - 2 --ensures that we only bring 2 years of date from extraction
+ORDER BY OrderDateKey
+```
+![image](https://user-images.githubusercontent.com/84619797/210082437-28e7a939-ccf1-466e-8269-6fb412035ace.png)
+
+## Entity Relationship Diagram
+After importing all CSV files to Power BI, the data model will look like this:
+<img src="https://user-images.githubusercontent.com/84619797/210082856-5ac6a1c8-b7f1-4b8b-a02c-9884b371e391.png" width="900" height="500" >
+
 ## Dashboard
+View the Power BI file [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/blob/main/Dashboard%20AdventureWork.pbix)
+View the PDF file [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/blob/main/PDF%20Adventurework.pdf
+
+<img src="https://user-images.githubusercontent.com/84619797/210082886-1d08b8f4-478c-469e-8cd4-e5e6058ce447.png" width="900" height="550" >
+
+<img src="https://user-images.githubusercontent.com/84619797/210083133-e5c7cf45-6956-4cc7-be54-2871e1d1f63e.png" width="900" height="550" >
+
+<img src="https://user-images.githubusercontent.com/84619797/210083139-75de78ca-08ba-4d32-805c-0a84716462e3.png" width="900" height="550" >
+
+
+---
+## 👏 Support
+Please give me a ⭐️ if you like this project!
+
+---
+© 2022 Anh Nguyen
