@@ -31,9 +31,9 @@ From the AdventureWork database, we use SQL to generate these tables below:
 * DIM_Calendar
 * FACT_InternetSales
 
-Then, save them as CSV files to import to Power BI later.
+Then, save them as CSV files to import to Power BI later. View all the files [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/tree/main/Data%20Cleaning).
 
-*Note: FACT_Budget is generated from a seperated Excel file [here](https://github.com/qanhnn12/AdventureWork-Sales-Analysis/blob/main/Data%20Cleaning/SalesBudget.xlsx).*
+*Note: FACT_Budget is generated from a seperated Excel file.*
 
 ### > Table `DIM_Customers`
 ```TSQL
