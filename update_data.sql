@@ -16,16 +16,16 @@ Date: 29/12/2022
 
 -- Declare variables
 
-DECLARE @CurrentYear INT
+DECLARE @CurrentYear int
 SET @CurrentYear = YEAR(GETDATE())
 
-DECLARE @LastDayCurrentYear DATE
+DECLARE @LastDayCurrentYear date
 SET @LastDayCurrentYear = DATEADD(dd, -1, DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) +1, 0)) 
 
-DECLARE @MaxDateInDW INT
+DECLARE @MaxDateInDW int
 SELECT @MaxDateInDW = MAX(YEAR(orderdate)) FROM [dbo].[FactInternetSales] 
 
-DECLARE @YearsToAdd INT 
+DECLARE @YearsToAdd int 
 SET @YearsToAdd = @CurrentYear - @MaxDateInDW 
 
 
@@ -103,7 +103,7 @@ INSERT INTO [dbo].[DimDate]
 )
 
 SELECT 
-	CONVERT(INT, CONVERT(VARCHAR, dl.FullDate, 112)) AS DateKey
+	CONVERT(int, CONVERT(varchar, dl.FullDate, 112)) AS DateKey
 	, dl.FullDate AS FullDateAlternateKey
 	, DATEPART(dw,dl.FullDate) AS DayNumberOfWeek
 	, DATENAME(weekday,dl.FullDate) AS EnglishDayNameOfWeek
