@@ -15,6 +15,7 @@ Date: 29/12/2022
 */
 
 -- Declare variables
+
 DECLARE @CurrentYear INT
 SET @CurrentYear = YEAR(GETDATE())
 
@@ -34,10 +35,13 @@ BEGIN
 
 
 -- Delete leap year records (February 29th)
+
 DELETE FROM FactCurrencyRate WHERE MONTH([Date]) = 2 AND DAY([Date]) = 29
 DELETE FROM FactProductInventory  WHERE MONTH([MovementDate]) = 2 AND DAY([MovementDate]) = 29
 
--- Drop foreign keys 
+
+-- Drop foreign keys
+
 ALTER TABLE FactCurrencyRate DROP CONSTRAINT FK_FactCurrencyRate_DimDate 
 ALTER TABLE FactFinance DROP CONSTRAINT FK_FactFinance_DimDate 
 ALTER TABLE FactInternetSales DROP CONSTRAINT FK_FactInternetSales_DimDate 
@@ -56,7 +60,9 @@ DECLARE
 
 DECLARE @datelist TABLE (FullDate DATE);  
 
+
 -- Recursive date query
+
 WITH dt_cte AS (
 	SELECT @startdate AS FullDate  
 	UNION ALL  
@@ -71,6 +77,7 @@ INSERT INTO @datelist
 	
 
 -- Populates the Date Dimension
+
 SET DATEFIRST 7;	-- Set the first day of the week to Monday 
 
 INSERT INTO [dbo].[DimDate]
@@ -224,7 +231,6 @@ UPDATE FactSalesQuota SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONV
 UPDATE FactSurveyResponse SET DateKey = CASE WHEN DateKey IS NOT NULL THEN CAST(CONVERT(varchar, [Date], 112) AS int) END 
 
  
-
 -- Update tables where year is a number in the format YYYY 
 
 UPDATE FactSalesQuota SET CalendarYear = CASE WHEN CalendarYear IS NOT NULL THEN @YearsToAdd + CalendarYear END 
@@ -255,7 +261,7 @@ REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactInternetSales] CHECK CONSTRAINT [FK_FactInternetSales_DimDate1]
 
-ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD  CONSTRAINT [FK_FactInternetSales_DimDate2] FOREIGN KEY([ShipDateKey])
+ALTER TABLE [dbo].[FactInternetSales] WITH CHECK ADD CONSTRAINT [FK_FactInternetSales_DimDate2] FOREIGN KEY([ShipDateKey])
 REFERENCES [dbo].[DimDate] ([DateKey])
 
 ALTER TABLE [dbo].[FactInternetSales] CHECK CONSTRAINT [FK_FactInternetSales_DimDate2]
