@@ -42,7 +42,7 @@ SELECT
   ,c.[FirstName] + ' ' + c.[LastName] AS FullName
   ,CASE c.[Gender] WHEN 'M' THEN 'Male' ELSE 'Female' END AS Gender
   ,c.[DateFirstPurchase]
-	,g.City AS [Customer City]
+  ,g.City AS [Customer City]
 FROM [AdventureWorksDW2019].[dbo].[DimCustomer] c
 LEFT JOIN [dbo].[DimGeography] g
   ON c.GeographyKey = g.GeographyKey
