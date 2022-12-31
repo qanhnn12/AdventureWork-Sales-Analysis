@@ -44,8 +44,7 @@ SELECT
   ,c.[DateFirstPurchase]
   ,g.City AS [Customer City]
 FROM [AdventureWorksDW2019].[dbo].[DimCustomer] c
-LEFT JOIN [dbo].[DimGeography] g
-  ON c.GeographyKey = g.GeographyKey
+LEFT JOIN [dbo].[DimGeography] g ON c.GeographyKey = g.GeographyKey
 ORDER BY c.CustomerKey
 ```
 ![image](https://user-images.githubusercontent.com/84619797/210081674-04c93ed4-873c-4a88-a8b7-d6bdc86c540d.png)
